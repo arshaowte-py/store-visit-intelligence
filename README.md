@@ -18,6 +18,13 @@ Issue tracking built from store visit reports across the Frido retail network.
 Reported by Saiyed Abdal, Ganesh sir, Pratik Hapase, Aniruddha Bansod, Arsh Aowte,
 Nishrit Pandita and the retail VM leadership group.
 
+## Doctor database scraper
+
+`scraper/` is a standalone pipeline that builds a doctors/clinics database
+(orthopaedists, physiotherapists, podiatrists) city-wise and area-wise from
+Google Maps via SerpAPI. It is not part of the static site — see
+`scraper/README.md` for setup and usage.
+
 ## Linking from Asana
 
 Each Asana task points at its issue page:

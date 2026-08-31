@@ -1,0 +1,70 @@
+# Doctor scraper configuration.
+#
+# Budget math before you run: queries = areas × specialties (per city),
+# and each query costs up to `max_pages_per_query` SerpAPI searches.
+# Run `python scrape_doctors.py plan` to see the exact count.
+
+# A run stops after this many API searches unless overridden with --max-searches.
+# Keeps a misconfigured run from burning the monthly quota.
+max_searches_per_run: 50
+
+# Pages fetched per query. Each page = 1 SerpAPI search = up to 20 results.
+# Dense areas (e.g. "physiotherapist in Andheri, Mumbai") fill 3+ pages;
+# start with 2 and raise it after a pilot run shows pages coming back full.
+max_pages_per_query: 2
+
+# Seconds to wait between API calls.
+delay_seconds: 1.0
+
+# How queries are phrased. {specialty}, {area} and {city} are substituted.
+query_template: "{specialty} in {area}, {city}"
+
+# Localisation passed to SerpAPI.
+gl: in   # country
+hl: en   # language
+
+# What kind of practitioners to look for. Each entry multiplies the search
+# count, so add deliberately. Other candidates: chiropractor,
+# sports medicine doctor, spine specialist, diabetologist, rheumatologist.
+specialties:
+  - orthopaedic doctor
+  - physiotherapist
+  - podiatrist
+
+# City -> list of areas. Area-level queries are what make coverage deep:
+# a single "orthopaedic doctor in Pune" query caps out around 100 results,
+# but per-area queries surface the long tail of local clinics.
+cities:
+  Pune:
+    - Koregaon Park
+    - Kalyani Nagar
+    - Viman Nagar
+    - Kharadi
+    - Baner
+    - Aundh
+    - Wakad
+    - Hinjewadi
+    - Kothrud
+    - Deccan Gymkhana
+    - Camp
+    - Hadapsar
+    - Magarpatta
+    - Bibwewadi
+  # Uncomment / extend as the pilot proves out:
+  # Mumbai:
+  #   - Bandra West
+  #   - Andheri West
+  #   - Powai
+  #   - Dadar
+  #   - Lower Parel
+  #   - Juhu
+  #   - Malad West
+  #   - Chembur
+  #   - Thane West
+  # Bangalore:
+  #   - Indiranagar
+  #   - Koramangala
+  #   - HSR Layout
+  #   - Jayanagar
+  #   - Whitefield
+  #   - Hebbal

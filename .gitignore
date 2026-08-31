@@ -2,3 +2,10 @@
 Thumbs.db
 *.zip
 node_modules/
+
+# scraper — secrets, local database, generated exports
+scraper/.env
+scraper/.venv/
+scraper/doctors.db
+scraper/exports/
+__pycache__/
